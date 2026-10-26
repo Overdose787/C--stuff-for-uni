@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="main\PRC\" />
+      <Folder Include="main\" />
     </ItemGroup>
 
 </Project>

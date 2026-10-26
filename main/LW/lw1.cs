@@ -21,6 +21,7 @@ public class Lw1
         }
         
     }
+    
     public static void input_sides(out int a, out int b, out int c)
     {
         string input;

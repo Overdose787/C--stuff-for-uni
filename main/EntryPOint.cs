@@ -1,3 +1,4 @@
+using eggsbasket.PRC;
 using thing;
 
 namespace eggsbasket.main;
@@ -6,6 +7,6 @@ public class EntryPOint
 {
     static void Main()
     {
-        thing.pz2.systemd();
+     new lb3().run();
     }
 }
