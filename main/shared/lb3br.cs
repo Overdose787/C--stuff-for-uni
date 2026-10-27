@@ -34,6 +34,7 @@ public class hunter : entity
     
     private int gold;
     private int arrows;
+    private int prey;
 
     public hunter(string nme):base(nme)
     {
@@ -47,9 +48,10 @@ public class hunter : entity
     }
     
     public int getgold() => gold;
-    public int getarrows() => arrows;
+    public int getprey() => prey;
     public int setgold(int vl) => gold += vl;
     public int setarrows(int vl) => arrows += vl;
+    public int setprey(int vl) => prey += vl;
     public void hunt()
     {
         if (arrows >= 1)
@@ -60,6 +62,7 @@ public class hunter : entity
                 takedamage(new Random().NextDouble() - 0.3);
                 Console.WriteLine($"Hunter had an sucsesful hunt! - remaining health - {(int)(gethealth() * 100)}");
                 gold += new Random().Next(0, 25);
+                setprey(1);
             }
             else
             {

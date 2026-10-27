@@ -54,12 +54,12 @@ public class lb3 : methodscontainer
 
             if (hunter.gethealth() <= 0)
             {
-                Console.WriteLine($"You are dead , not big surprise\n winner - {hunter2.retrivename()}");
+                Console.WriteLine($"You are dead , not big surprise\n winner - {hunter2.retrivename()} with prey - {hunter2.getprey()}");
                 break;
             }
             else if (hunter2.gethealth() <= 0)
             {
-                Console.WriteLine($"You are dead , not big surprise\n winner - {hunter.retrivename()}");
+                Console.WriteLine($"You are dead , not big surprise\n winner - {hunter.retrivename()} with prey - {hunter.getprey()}");
                 break;
             }
             Console.WriteLine($"{current_hunter.retrivename()} your time`s up , now its other one time");
