@@ -7,6 +7,6 @@ public class EntryPOint
 {
     static void Main()
     {
-     new lb3().run();
+     new Library().run();
     }
 }
