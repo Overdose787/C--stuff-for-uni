@@ -10,9 +10,21 @@ public abstract class Vehicle
     private decimal _costPerKG;
 
     private bool _isAvaible = true;
-    
+
     private int _distanceRestrictionsKM ;
     private int _weightRestrictionsKG ;
+
+    public int getWeightRestrictionsKG() => _weightRestrictionsKG;
+    public int getDistanceRestrictionsKM() => _distanceRestrictionsKM;
+    public bool getAvailability() => _isAvaible;
+
+    public decimal getStandartCost() => _standartCost;
+
+    public decimal getStandartPerKG() => _standartPerKG;
+
+    public decimal getCostPerKG() => _costPerKG;
+
+    public char getType() => _type;
 
     public Vehicle(char type , decimal standartCost, decimal standartPerKM, decimal costPerKG , int distanceRestrictionsKM , int weightRestrictionsKM)
     {
@@ -28,9 +40,9 @@ public abstract class Vehicle
         }
         _standartPerKG = standartPerKM;
 
-        if (costPerKG <= 0)
+        if (costPerKG <= -1)
         {
-            throw new ArgumentException("Cost per kg must be greater than zero");
+            throw new ArgumentException("Cost per kg must be positive");
         }
         _costPerKG = costPerKG;
 
@@ -40,24 +52,29 @@ public abstract class Vehicle
         }
         _weightRestrictionsKG = weightRestrictionsKM;
 
-        if (distanceRestrictionsKM <= 0)
+        if (distanceRestrictionsKM <= -1)
         {
-            throw new ArgumentException("Distance Restrictions per km must be greater than zero");
+            throw new ArgumentException("Distance Restrictions per km must bepositive");
         }
         _distanceRestrictionsKM = distanceRestrictionsKM;
-        
-        switch (type)
+
+        if (type != 'c' && type != 'b' && type != 't')
         {
-            case 'a':
-                _type = 'a';
-                return;
-            case 'b':
-                _type = 'b';
-                return;
-            case 't':
-                _type = 't';
-                return;
+            throw new ArgumentException($"Invalid vehicle type - {type}");
         }
-        throw new ArgumentException("Invalid vehicle type");
+
+        _type = type;
+
     }
+
+    virtual public bool canTake(Order order)
+    {
+        if (order.getWeight() <= _weightRestrictionsKG && _isAvaible)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    abstract public decimal CalculateCost(Order order);
 }
