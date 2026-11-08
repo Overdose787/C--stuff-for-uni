@@ -9,7 +9,7 @@ public class Truck : Vehicle
     {
         if (!canTake(order))
         {
-            Console.WriteLine("cant take");
+            Console.WriteLine("cant take"); 
             return -1;
         }
 

@@ -15,6 +15,7 @@ public class Order
         _distanceKM = distanceKM;
     }
 
+    public int getId() => _id;
     public double getWeight() => _weightKG;
-    public int getDistance() => _distanceKM;
+    public int getDistance() => _distanceKM; 
 }
