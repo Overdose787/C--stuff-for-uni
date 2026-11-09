@@ -29,7 +29,7 @@ for (int i = 0; i < vehicles.Length; i++)
     }
 }
 
-for (int i = 0; i < 20; i++)
+for (int i = 0; i < 19; i++)
 {
     int randomId = ranD.Next(0, 999999999);
     
@@ -43,12 +43,12 @@ for (int i = 0; i < 20; i++)
         break;
     }
 
-    double randomWeight = ranD.Next(1, 1000);
-    int randomDistance = ranD.Next(0, 100);
+    double randomWeight = ranD.Next(1, 899);
+    int randomDistance = ranD.Next(1, 100);
     
-    orders[i] = new Order(randomId , $"desc - {i}" , randomWeight ,randomDistance );
+    orders.Add(new Order(randomId , $"desc - {i}" , randomWeight ,randomDistance ));
 }
-
+/*
 Console.WriteLine("Build complete");
 Console.ReadKey();
 Console.Clear();
@@ -71,6 +71,8 @@ foreach (var VARIABLE in orders)
 
 Console.ReadKey();
 Console.Clear();
+*/
+decimal total = 0;
 
 while (true)
 {
@@ -78,15 +80,23 @@ while (true)
     foreach(var VARIABLE in orders)
     {
         Vehicle VehicleThatWillTake = deliveryService.GetOptimalAvaiable(vehicles,VARIABLE); //here we finding vehicle that can take order using get optimal and shit
+        
         if (VehicleThatWillTake == null)
         {
             continue;
         }
+        
         deliveryService.ProcessOrder(VARIABLE , VehicleThatWillTake); //here we adding order to vehicle 
-        break;
+
+        decimal cost = VehicleThatWillTake.CalculateCost(VARIABLE);
+        total += cost;
+        Console.WriteLine($"cost of delivery - {VARIABLE.getId()} - {cost}$");
     }
     
-    deliveryService.resetall(vehicles , orders); //here we updating shit
+    deliveryService.DeliverAll(vehicles , orders); //here we updating shit
+    Console.WriteLine("------------------");
+    Console.WriteLine($"summary\ntotal wealth acuulated : {total}$");
+    Console.WriteLine("------------------");
     
     if (orders.Count == 0)
     {

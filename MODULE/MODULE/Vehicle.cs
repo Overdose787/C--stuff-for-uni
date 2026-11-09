@@ -26,7 +26,7 @@ public abstract class Vehicle
     
     public char getType() => _type;
 
-    private List<Order> _carryingNow;
+    private List<Order> _carryingNow = new List<Order>();
     
     public Vehicle(char type , decimal standartCost, decimal standartPerKM, decimal costPerKG , int distanceRestrictionsKM , int weightRestrictionsKG)
     {
@@ -72,13 +72,24 @@ public abstract class Vehicle
     public void AddPackage(Order order)
     {
         double total = 0;
-        foreach (var VARIABLE in _carryingNow)
+
+        if (_carryingNow == null)
         {
-            total += VARIABLE.getWeight();
+            Console.WriteLine("undefined behivour");
+            _carryingNow = new List<Order>();
+        }
+        
+        if (_carryingNow.Count != 0)
+        {
+            foreach (var VARIABLE in _carryingNow)
+            {
+                total += VARIABLE.getWeight();
+            }
         }
 
         if (order.getWeight() + total >= _weightRestrictionsKG)
         {
+            Console.WriteLine("rejected");
             return;
         }
         _carryingNow.Add(order);
@@ -88,6 +99,7 @@ public abstract class Vehicle
         if (_carryingNow.Count == 0)
         {
             FlipType();
+            return;
         }
         
         orders.Remove(_carryingNow[0]);
@@ -95,18 +107,18 @@ public abstract class Vehicle
     }
     public void FlipType()
     {
-        if (!_isAvaible && _carryingNow.Count == 0)
+        if (_isAvaible == false && _carryingNow.Count == 0)
         {
             _isAvaible = true;
         }
-        else if (_isAvaible && _carryingNow.Count > 0)
+        else if (_isAvaible == true && _carryingNow.Count > 0)
         {
             _isAvaible = false;
         }
     }
     virtual public bool canTake(Order order)
     {
-        if (order.getWeight() <= _weightRestrictionsKG && _isAvaible)
+        if (order.getWeight() <= _weightRestrictionsKG && _isAvaible == true)
         {
             return true;
         }

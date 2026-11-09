@@ -6,7 +6,6 @@ public class Order
     private string _desctiption;
     private double _weightKG;
     private int _distanceKM;
-
     public Order(int id, string desctiption, double weightKG, int distanceKM)
     {
         _id = id;

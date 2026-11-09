@@ -2,19 +2,19 @@ namespace MODULE;
 
 public class DeliveryService
 {
-    public bool ProcessOrder(Order order , Vehicle vehicle)
+    public void ProcessOrder(Order order , Vehicle vehicle)
     {
         if (vehicle.canTake(order))
         {
             Console.WriteLine($"proccesing order - {order.getId()} by - {vehicle.getType()}");
             vehicle.AddPackage(order);
             vehicle.FlipType();
-            return true;
+            return ;
         }
-        return false;
+        return;
     }
 
-    public void resetall(Vehicle[] vehicles , List<Order> orders)
+    public void DeliverAll(Vehicle[] vehicles , List<Order> orders)
     {
         foreach (var VARIABLE in vehicles)
         {
@@ -66,7 +66,7 @@ public class DeliveryService
                 continue;
             }
 
-            if (VARIABLE.getAvailability())
+            if (VARIABLE.getAvailability() && VARIABLE.canTake(order))
             {
                 Console.WriteLine("found avaiable optimal vehicle");
                 return VARIABLE;
