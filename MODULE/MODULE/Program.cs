@@ -43,8 +43,8 @@ for (int i = 0; i < 19; i++)
         break;
     }
 
-    double randomWeight = ranD.Next(1, 899);
-    int randomDistance = ranD.Next(1, 100);
+    double randomWeight = ranD.Next(1, 901);
+    int randomDistance = ranD.Next(1, 30);
     
     orders.Add(new Order(randomId , $"desc - {i}" , randomWeight ,randomDistance ));
 }
@@ -73,7 +73,6 @@ Console.ReadKey();
 Console.Clear();
 */
 decimal total = 0;
-
 while (true)
 {
     Console.WriteLine($"All orders now - {orders.Count}");
@@ -102,4 +101,5 @@ while (true)
     {
         break;
     }
+    
 }

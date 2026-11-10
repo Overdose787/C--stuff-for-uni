@@ -9,7 +9,7 @@ public class DeliveryService
             Console.WriteLine($"proccesing order - {order.getId()} by - {vehicle.getType()}");
             vehicle.AddPackage(order);
             vehicle.FlipType();
-            return ;
+            return;
         }
         return;
     }
@@ -40,15 +40,21 @@ public class DeliveryService
         char optimal = getOptimal(order);
 
         if (optimal == 'b')
-        { 
-            foreach (Bike VARIABLE in vehicles) 
+        {
+            for (int i = 0; i < vehicles.Length; i++)
             {
-                if (VARIABLE.getType() == optimal && VARIABLE.getAvailability())
+
+                if (vehicles[i] is not Bike)
+                {
+                    continue;
+                }
+                
+                if (vehicles[i].getType() == optimal && vehicles[i].canTake(order))
                 {
                     Console.WriteLine("found avaiable optimal vehicle");
-                    return VARIABLE;
+                    return vehicles[i];
                 }
-            } 
+            }
             foreach (var VARIABLE in vehicles)
             {
                 if (VARIABLE.getAvailability())
