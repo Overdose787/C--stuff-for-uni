@@ -57,7 +57,7 @@ public class DeliveryService
             }
             foreach (var VARIABLE in vehicles)
             {
-                if (VARIABLE.getAvailability())
+                if (VARIABLE.canTake(order))
                 {
                     Console.WriteLine("found avaiable optimal vehicle");
                     return VARIABLE;
