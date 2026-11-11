@@ -10,7 +10,17 @@ public class Order
     {
         _id = id;
         _desctiption = desctiption;
+
+        if (_weightKG < 0)
+        {
+            throw new Exception("weight must be positive");
+        }
         _weightKG = weightKG;
+        
+        if (distanceKM < 0)
+        {
+            throw new Exception("distance must be positive");
+        }
         _distanceKM = distanceKM;
     }
 

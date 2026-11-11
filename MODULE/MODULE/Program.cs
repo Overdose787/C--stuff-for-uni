@@ -72,27 +72,28 @@ foreach (var VARIABLE in orders)
 Console.ReadKey();
 Console.Clear();
 */
+
 decimal total = 0;
+
 while (true)
 {
     Console.WriteLine($"All orders now - {orders.Count}");
     foreach(var VARIABLE in orders)
     {
-        Vehicle VehicleThatWillTake = deliveryService.GetOptimalAvaiable(vehicles,VARIABLE); //here we finding vehicle that can take order using get optimal and shit
+        Vehicle VehicleThatWillTake = deliveryService.GetOptimalAvaiable(vehicles,VARIABLE); 
         
         if (VehicleThatWillTake == null)
         {
             continue;
         }
         
-        deliveryService.ProcessOrder(VARIABLE , VehicleThatWillTake); //here we adding order to vehicle 
 
         decimal cost = VehicleThatWillTake.CalculateCost(VARIABLE);
         total += cost;
         Console.WriteLine($"cost of delivery - {VARIABLE.getId()} - {cost}$");
     }
     
-    deliveryService.DeliverAll(vehicles , orders); //here we updating shit
+    deliveryService.DeliverAll(vehicles , orders); 
     Console.WriteLine("------------------");
     Console.WriteLine($"summary\ntotal wealth acuulated : {total}$");
     Console.WriteLine("------------------");
